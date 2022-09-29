@@ -11,6 +11,7 @@
 }
 
 .todo {
+  display: flex;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -29,21 +30,28 @@
     border-right: 1px solid #f1f1f1;
     padding: 60px 20px;
   }
+
+  &__tasks {
+    flex: 1;
+    padding: 60px;
+  }
 }
 
 .button {
   background: #4DD599;
-  border-radius: 4px; 
+  border-radius: 4px;
   color: #fff;
   border: 0;
   padding: 10px 20px;
   cursor: pointer;
-  
-  &:hover { // при наведение
+
+  &:hover {
+    // при наведение
     background: darken(#4DD599, 6%);
   }
 
-  &:hover { // при клике
+  &:hover {
+    // при клике
     background: darken(#4DD599, 10%);
   }
 }

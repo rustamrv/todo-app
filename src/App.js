@@ -6,6 +6,7 @@ import AddList from "./components/AddList";
 import db from './assets/db.json';
 
 import './index.scss';
+import Tasks from "./components/Tasks";
 
 function App() {
   const [lists, setLists] = useState(db.lists.map(item => {
@@ -36,8 +37,8 @@ function App() {
           />
         <AddList onAdd={onAddList} colors={db.colors} />
       </div>
-      <div className="content">
-
+      <div className="todo__tasks">
+          <Tasks />     
       </div>
     </div>
   );
