@@ -1,38 +1,59 @@
 .list {
-    margin-bottom: 30px;
+  $self: &;
 
-    li {
-      display: flex;
-      align-items: center; 
-      cursor: pointer;
-      padding: 10px 12px;
-      margin-bottom: 5px;
+  margin-bottom: 30px;
 
-      &.add-button{
-        opacity: 0.4;
+  &.add-button {
+    opacity: 0.4;
 
-        &:hover {
-          opacity: 1;
-        }
-      }
-
-      &.active {
-        background: #FFFFFF;
-        box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.04);
-        border-radius: 4px;
-      }
-
-      .badge { 
-        position: relative;
-        left: 5px;
-    }
-
-      i {
-        margin-right: 8px;
-        img {
-          opacity: 0.6;
-        }
-      }
-
+    &:hover {
+      opacity: 1;
     }
   }
+
+  li {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px 12px;
+
+    &:hover #{$self}__remove-icon {
+      opacity: 0.2;
+    }
+
+    #{$self}__remove-icon {
+      opacity: 0;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    span {
+      flex: 1;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    &.active {
+      background: #FFFFFF;
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.04);
+      border-radius: 4px;
+    }
+
+    .badge {
+      position: relative;
+      left: 5px;
+    }
+
+    i {
+      margin-right: 8px;
+
+      img {
+        opacity: 0.6;
+      }
+    }
+
+  }
+}
