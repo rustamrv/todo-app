@@ -10,5 +10,7 @@ npm install
 ## Usage
 
 ```sh
+npm run fake-json
+
 npm run start
 ```
