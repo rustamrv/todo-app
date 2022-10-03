@@ -5,7 +5,7 @@ import removeSvg from '../../assets/img/remove.svg';
 
 import './List.scss';
 
-const List = ({ items, isRemovable, onClick, removeList, onClickItem, activeItem }) => {
+const List = ({ items, isRemovable, onClick, removeList,    onClickItem, activeItem }) => {
     return (
         <ul onClick={onClick} className="list">
             {
