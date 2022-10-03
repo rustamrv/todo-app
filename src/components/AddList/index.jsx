@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import List from '../List';
 import Badge from '../Badge';
 import addSvg from '../../assets/img/add.svg';
 import closeSvg from '../../assets/img/close.svg';
+import axios from 'axios';
 
 import './AddList.scss';
 
 
 const AddList = ({ colors, onAdd }) => {
     const [visiblePopup, setVisiblePopup] = useState(false);
-    const [selectedColor, selectColor] = useState(colors[0].id);
+    const [selectedColor, selectColor] = useState(null);
+    const [isLoading, setisLoading] = useState(false);
     const [inputValue, setInputValue] = useState('');
+
+    useEffect(() => {
+        if (Array.isArray(colors)) {
+            selectColor(colors[0].id);
+        }
+    }, [colors])
 
     const onClose = () => {
         setVisiblePopup(false);
@@ -22,16 +30,17 @@ const AddList = ({ colors, onAdd }) => {
             alert('Введите название листа')
             return
         }
+        setisLoading(true)
+        axios.post("http://localhost:3001/lists", { name: inputValue, colorId: selectedColor }).then(({ data }) => {
+            const color = colors.filter(c => c.id === selectedColor)[0].name;
+            let newObj = { ...data, color: { name: color } }
+            onAdd(newObj);
+            onClose(); 
+        }).catch(() => {
 
-        const color = colors.filter(c => c.id === selectedColor)[0].name;
-
-        const newList = {
-            id: Math.random(),
-            name: inputValue,
-            color
-        };
-        onAdd(newList);
-        onClose();
+        }).finally(()=>{
+            setisLoading(false);
+        })
     }
 
     return (
@@ -45,7 +54,7 @@ const AddList = ({ colors, onAdd }) => {
                             icon: <img src={addSvg} alt="Add list" />,
                             name: "Добавить список",
                         },
-                    ]} 
+                    ]}
             />
             {visiblePopup && (
                 <div className='add-list__popup'>
@@ -76,7 +85,9 @@ const AddList = ({ colors, onAdd }) => {
                             ))
                         }
                     </div>
-                    <button onClick={addList} className='button'>Добавить</button>
+                    <button onClick={addList} className='button'>
+                        {isLoading ? "Добавление" : "Добавить"}
+                    </button>
                 </div>
             )}
         </div>
