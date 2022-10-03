@@ -54,6 +54,19 @@
     // при клике
     background: darken(#4DD599, 10%);
   }
+
+  &--grey {
+    background: #f4f6f8;
+    color: #444444;
+
+    &:hover {
+      background: darken($color: #f4f6f8, $amount: 3%);
+    }
+
+    &:active {
+      background: darken($color: #f4f6f8, $amount: 6%);
+    }
+  }
 }
 
 .field {
